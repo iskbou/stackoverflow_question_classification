@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Démonstration de la classification de question stackoverflow</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+        html,
+        body {
+            background: #f2f5f9;
+            min-height: 100%;
+            margin: 10px;
+
+        }
+
+        body,
+        p {
+            padding: 0;
+            margin: 0;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 24px;
+            color: #888;
+        }
+      .main-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      }
+        .box {
+            display: flex;
+            align-self: end;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            padding:20px 5% 10px 5%;
+            background: #fff;
+            box-shadow: 0px 0px 5px 2px #ccc;
+            width: 70%;
+            border: 0 0 1px 7px;
+        }
+
+        button {
+            flex: 6;
+            align-self: flex-end;
+            width: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #095484;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-up {}
+
+        .form {
+            display: flex;
+            align-self: center;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            width: 100%;
+            padding-left:5%;
+            padding-right:5%;
+        }
+
+        .form-left {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 100%;
+            min-width:75%;
+            flex-wrap:wrap;
+            object-fit: contain;
+
+        }
+
+        .form-right {
+            display: flex;
+            align-self: center;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            width: 45%;
+            flex: 6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-block">
+    <div class=box>
+
+        <div class="form-up">
+            <h1>
+                Classification de questions.
+            </h1>
+            <p>
+                Pour obtenir une suggestion de tags, veuillez entrez votre question ci-dessous.
+            </p>
+        </div>
+        <div class="form">
+            <div class="form-left">
+                <h4> Titre de la question.</h4>
+                <input type="text" style="width:65%;" />
+                <h4> Texte de la question</h4>
+                <textarea type="textarea" style="width:65%;height:20em;"></textarea>
+            </div>
+            <div class="form-right">
+                <button placeholer="salut">Soummettre</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
