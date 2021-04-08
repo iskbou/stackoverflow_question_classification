@@ -77,10 +77,19 @@
             object-fit: contain;
 
         }
-
-        .form-right {
+        .form-right-up {
             display: flex;
-            align-self: center;
+            align-self: flex-start;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            width: 45%;
+            flex: 6;
+        }
+
+        .form-right-down {
+            display: flex;
+            align-self: flex-end;
             justify-content: center;
             align-items: flex-start;
             flex-direction: row;
@@ -107,10 +116,10 @@
                 <h4> Titre de la question.</h4>
                 <input type="text" style="width:65%;" />
                 <h4> Texte de la question</h4>
-                <textarea type="textarea" style="width:65%;height:20em;"></textarea>
+                <textarea type="textarea" style="width:65%;max-width:90%;height:20em;"></textarea>
             </div>
-            <div class="form-right">
-                <button placeholer="salut">Soummettre</button>
+            <div class="form-right-down" >
+                <button >Soummettre</button>
             </div>
         </div>
     </div>
