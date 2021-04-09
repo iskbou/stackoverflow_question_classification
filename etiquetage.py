@@ -6,8 +6,8 @@ pa=load('C:/Users/Niskiwork/Documents/Silexia/GitHub/stackoverflow_question_clas
 proc=load('C:/Users/Niskiwork/Documents/OpenClassroom/Projet 5 - StackExhange Questions tag/processing.joblib')
 labenc=load('C:/Users/Niskiwork/Documents/OpenClassroom/Projet 5 - StackExhange Questions tag/label.joblib')
 test=pd.DataFrame(columns=['year','Title','Body_text'])
-test['Title']=["How can I check if a Pandas dataframe's index is sorted"]
-test['Body_text']=['I have a vanilla pandas dataframe with an index. I need to check if the index is sorted. Preferably without sorting it again.\ne.g. I can test an index to see if it is unique by index.is_unique() is there a similar way for testing sorted?\n']
+test['Title']=['What does "a" stand for in font: 0/0 a;']
+test['Body_text']=["I was referring a video tutorial where the designer used font: 0/0 a; for image replacement, so I get that 0 is the font-size, another 0 is the line-height but designer skips the a part just by saying that's an hack.\nSo what does that a exactly do there?\n"]
 test['year']=[2021]
 
 
