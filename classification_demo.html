@@ -9,7 +9,7 @@
         body {
             background: #f2f5f9;
             min-height: 100%;
-            margin: 10px;
+            margin: 5px;
 
         }
 
@@ -33,10 +33,10 @@
             justify-content: center;
             align-items: flex-start;
             flex-direction: column;
-            padding:20px 5% 10px 5%;
+            padding:20px 10% 10px 10%;
             background: #fff;
             box-shadow: 0px 0px 5px 2px #ccc;
-            width: 70%;
+            width: 80%;
             border: 0 0 1px 7px;
         }
 
@@ -62,8 +62,8 @@
             align-items: flex-start;
             flex-direction: row;
             width: 100%;
-            padding-left:5%;
-            padding-right:5%;
+            padding-left:2%;
+            padding-right:2%;
         }
 
         .form-left {
@@ -80,11 +80,20 @@
         .form-right-up {
             display: flex;
             align-self: flex-start;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: flex-start;
             flex-direction: row;
-            width: 45%;
-            flex: 6;
+            width: 100%;
+        }        
+        .form-right {
+            display: flex;
+            align-self: flex-end;
+            justify-content: flex-start;
+            align-items: flex-end;
+            flex-direction: column;
+            min-width: 45%;
+            width: 100%;
+            min-height: 60vh;
         }
 
         .form-right-down {
@@ -93,9 +102,47 @@
             justify-content: center;
             align-items: flex-start;
             flex-direction: row;
-            width: 45%;
+        
+            width: 100%;
             flex: 6;
         }
+        /* Loading animation */ 
+        .lds-ripple {
+        display: inline-block;
+        position:relative ;
+        width: 80px;
+        height: 80px;
+        justify-content: center;
+        align-items: center;
+        }
+        .lds-ripple div {
+        position: absolute;
+        border: 4px solid #095484;
+        opacity: 1;
+        border-radius: 200%;
+        animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+        .lds-ripple div:nth-child(2) {
+        animation-delay: -0.5s;
+        }
+        @keyframes lds-ripple {
+        0% {
+            top: 180px;
+            left: 180px;
+            width: 0;
+            height: 0;
+            opacity: 1;
+        }
+        100% {
+            top: 0px;
+            left: 0px;
+            width: 360px;
+            height: 360px;
+            opacity: 0;
+        }
+        }
+
+
     </style>
 </head>
 
@@ -111,19 +158,53 @@
                 Pour obtenir une suggestion de tags, veuillez entrez votre question ci-dessous.
             </p>
         </div>
-        <div class="form">
+        <div class="form" >
+            {% csrf_token %}
             <div class="form-left">
                 <h4> Titre de la question.</h4>
-                <input type="text" style="width:65%;" />
+                <input id='titre' type="text" style="width:65%;" />
                 <h4> Texte de la question</h4>
-                <textarea type="textarea" style="width:65%;max-width:90%;height:20em;"></textarea>
+                <textarea id='corps' type="textarea" style="width:65%;max-width:90%;height:20em;"></textarea>
             </div>
+            <div class="form-right">
+                <div class="form-right-up">
+                    <ol id="tags"></ol>
+                </div>
             <div class="form-right-down" >
-                <button >Soummettre</button>
+                <button type='submit' id='soummettre'>Soummettre</button>
             </div>
+
+            </div>
+        
         </div>
     </div>
     </div>
+    <script type="text/javascript">
+    document.querySelector("#soummettre").addEventListener("click", event => {
+        let formData = new FormData();
+        formData.append('corps', document.querySelector("#corps").value);
+        formData.append('titre', document.querySelector("#titre").value);
+        let csrfTokenValue = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const request = new Request('/etiquette/', {
+        method: 'POST',
+        body: formData,
+        headers: {'X-CSRFToken': csrfTokenValue} });
+        const resultElement = document.querySelector("#tags");
+        resultElement.innerHTML ='<div class="lds-ripple"  style="justify-content: center;align-items: center;"><div style="justify-content: center;align-items: center;"></div><div style="justify-content: center;align-items: center;"></div></div>';
+        fetch(request)
+        .then(response => response.json())
+        .then(resultat => {
+            const resultElement = document.querySelector("#tags");
+            resultElement.innerHTML = "<h4>Nous avons determiner que les tags suivant pourraient convenir à votre question:<br><br></h4> ";
+            for (var j = 0; j < resultat.tag.length; j++) {
+            var listItem = document.createElement('li');
+            listItem.textContent = resultat.tag[j];
+            resultElement.appendChild(listItem);
+    }
+            
+        })
+})
+</script>
 </body>
 
 </html>
