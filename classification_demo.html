@@ -196,8 +196,8 @@
         .then(resultat => {
             if (resultat.tag.length==0){
             const resultElement = document.querySelector("#tags");
-            resultElement.innerHTML = "<h4>Nous n'avons pas pu déterminer les tags qui pourraient convenir à votre question:<br><br></h4> ";
-            }
+            resultElement.innerHTML = "<h4>Nous n'avons pas pu déterminer de tags qui pourraient convenir à votre question<br><br></h4> ";
+            }else{
             const resultElement = document.querySelector("#tags");
             resultElement.innerHTML = "<h4>Nous avons déterminer que les tags suivant pourraient convenir à votre question:<br><br></h4> ";
             for (var j = 0; j < resultat.tag.length; j++) {
@@ -205,6 +205,7 @@
             listItem.textContent = resultat.tag[j];
             resultElement.appendChild(listItem);
     }
+}
             
         })
 })
