@@ -171,7 +171,7 @@
                     <ol id="tags"></ol>
                 </div>
             <div class="form-right-down" >
-                <button type='submit' id='soummettre'>Soummettre</button>
+                <button type='submit' id='soumettre' style="max-width:min-content">Soumettre</button>
             </div>
 
             </div>
@@ -180,7 +180,7 @@
     </div>
     </div>
     <script type="text/javascript">
-    document.querySelector("#soummettre").addEventListener("click", event => {
+    document.querySelector("#soumettre").addEventListener("click", event => {
         let formData = new FormData();
         formData.append('corps', document.querySelector("#corps").value);
         formData.append('titre', document.querySelector("#titre").value);
@@ -194,8 +194,12 @@
         fetch(request)
         .then(response => response.json())
         .then(resultat => {
+            if (resultat.tag.length==0){
             const resultElement = document.querySelector("#tags");
-            resultElement.innerHTML = "<h4>Nous avons determiner que les tags suivant pourraient convenir à votre question:<br><br></h4> ";
+            resultElement.innerHTML = "<h4>Nous n'avons pas pu déterminer les tags qui pourraient convenir à votre question:<br><br></h4> ";
+            }
+            const resultElement = document.querySelector("#tags");
+            resultElement.innerHTML = "<h4>Nous avons déterminer que les tags suivant pourraient convenir à votre question:<br><br></h4> ";
             for (var j = 0; j < resultat.tag.length; j++) {
             var listItem = document.createElement('li');
             listItem.textContent = resultat.tag[j];
